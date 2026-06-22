@@ -16,6 +16,21 @@ No Claude Code, você usava comandos de barra rígidos (como `/mktos:conta troca
 3. O script grava a informação da conta ativa no arquivo local `./data/clientes/_conta-ativa.json`.
 4. Todas as outras Skills (como relatórios, planos de mídia e pacing) lêem este arquivo de estado antes de rodar, isolando todas as leituras e escritas apenas na subpasta daquele cliente específico (`./data/clientes/{slug}/`).
 
+### Preciso gerenciar meus clientes e salvar seus arquivos de trabalho obrigatoriamente dentro do repositório mktOS?
+Não necessariamente. Você tem duas opções de acordo com o seu fluxo de trabalho:
+
+1. **Abordagem Híbrida (Recomendada)**: 
+   * **Dados de Controle/Metadados (JSONs e Work-Logs)**: Deixe que o mktOS Mídia crie e gerencie os perfis de forma silenciosa dentro da pasta `./data/` do próprio repositório.
+   * **Arquivos do dia a dia do Cliente (Briefings, Imagens, CSVs, PDFs)**: Você pode guardá-los em qualquer pasta fora do repositório (ex: `~/Documentos/Clientes/{cliente}/`). Durante a conversa com a IA, basta você pedir para ela salvar ou ler arquivos de lá passando o caminho absoluto (ex: *"Gere o briefing de criativos e salve em /Users/dantas/Documents/Clientes/Alpha/briefing.md"*).
+2. **Abordagem Auto-Contida em Documentos**:
+   * Se preferir concentrar **todo o projeto** (código, scripts e dados do sistema `./data/`) em uma pasta como `Documentos`, você pode mover a pasta inteira do repositório para lá (ex: `~/Documentos/mktOS-midia`).
+   * Para atualizar o link lógico das IAs com o novo caminho, basta abrir o terminal no novo diretório e rodar o instalador novamente:
+     ```bash
+     cd ~/Documents/mktOS-midia
+     ./install.sh
+     ```
+     O instalador atualizará os atalhos e links simbólicos automaticamente e tudo continuará funcionando com a pasta de dados local contida no novo local.
+
 ---
 
 ## 🛠️ 2. Desenvolvimento e Ciclo de Vida do Plugin
