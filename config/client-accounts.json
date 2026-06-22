@@ -1,0 +1,5 @@
+{
+  "_descricao": "Referência de contas de plataforma por cliente. Preenchido automaticamente pelo /mktos:conta adicionar e /mktos:configurar.",
+  "_instrucoes": "Não edite este arquivo manualmente. Use os comandos /mktos:conta para gerenciar clientes.",
+  "clientes": []
+}

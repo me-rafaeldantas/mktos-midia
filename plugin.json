@@ -1,0 +1,16 @@
+{
+  "name": "mktos-midia",
+  "version": "0.2.0",
+  "description": "mktOS Mídia — Sistema operacional de mídia paga especializado para Antigravity e Claude Code",
+  "author": {
+    "name": "Rafael Dantas"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "marketing",
+    "traffic",
+    "ads",
+    "google-ads",
+    "meta-ads"
+  ]
+}

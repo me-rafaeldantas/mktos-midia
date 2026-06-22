@@ -1,0 +1,28 @@
+{
+  "_comentario": "Este arquivo é um exemplo do schema de workspace.json. O arquivo real fica em ./data/workspace.json e é criado pelo /mktos:configurar.",
+
+  "nome": "Minha Agência",
+  "tipo": "agencia",
+
+  "_tipos_disponiveis": "agencia | empresa | freela | eugencia",
+
+  "email_admin": "seuemail@exemplo.com",
+  "moeda_padrao": "BRL",
+
+  "_moedas_suportadas": "BRL | USD | EUR",
+
+  "aprovacao_obrigatoria": true,
+  "_aprovacao_comentario": "Se true, nenhuma chamada MCP de escrita (criar campanha, atualizar tarefa) é executada sem confirmação explícita do usuário.",
+
+  "limite_orcamento_diario_global": null,
+  "_limite_comentario": "Limite em unidades da moeda_padrao. null = sem limite global. Pode ser sobrescrito por cliente em perfil.json.",
+
+  "clientes": ["cliente-exemplo-1", "cliente-exemplo-2"],
+  "_clientes_comentario": "Lista de slugs. Cada slug corresponde a um diretório em ./data/clientes/{slug}/.",
+
+  "integracoes_ativas": ["google-ads", "meta-marketing", "clickup-midify"],
+  "_integracoes_comentario": "Deve corresponder às chaves definidas em .mcp.json do plugin.",
+
+  "criado_em": "YYYY-MM-DDTHH:MM:SSZ",
+  "atualizado_em": "YYYY-MM-DDTHH:MM:SSZ"
+}

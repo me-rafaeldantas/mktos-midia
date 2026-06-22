@@ -1,0 +1,65 @@
+{
+  "_instrucoes": "Use o assistente rodando: python3 scripts/configurar-mcp.py para configurar cada integração.",
+  "mcpServers": {
+    "google-ads": {
+      "command": "uvx",
+      "args": ["mcp-google-ads"],
+      "env": {
+        "GOOGLE_ADS_DEVELOPER_TOKEN": "INSIRA_SEU_DEVELOPER_TOKEN",
+        "GOOGLE_ADS_LOGIN_CUSTOMER_ID": "INSIRA_SEU_CUSTOMER_ID_MCC",
+        "GOOGLE_ADS_AUTH_TYPE": "oauth",
+        "GOOGLE_ADS_CREDENTIALS_PATH": "/caminho/para/google-ads-oauth.json"
+      },
+      "description": "Google Ads — campanhas, keywords, performance, Keyword Planner."
+    },
+    "meta-marketing": {
+      "command": "uvx",
+      "args": ["meta-ads-mcp"],
+      "env": {
+        "META_ACCESS_TOKEN": "INSIRA_SEU_META_ACCESS_TOKEN",
+        "META_APP_ID": "INSIRA_SEU_META_APP_ID",
+        "META_APP_SECRET": "INSIRA_SEU_META_APP_SECRET"
+      },
+      "description": "Meta Ads (Facebook/Instagram) — campanhas, criativos, audiências."
+    },
+    "google-drive-designlab": {
+      "command": "npx",
+      "args": ["-y", "mcp-google-drive"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "/caminho/para/google-drive-credentials.json"
+      },
+      "description": "Google Drive — assets e arquivos de campanha."
+    },
+    "gmail-guroo": {
+      "command": "npx",
+      "args": ["-y", "@gongrzhe/server-gmail-autoauth-mcp"],
+      "description": "Gmail — briefings, confirmações de lançamento, alertas de anomalia."
+    },
+    "google-calendar-guroo": {
+      "command": "npx",
+      "args": ["-y", "@cocal/google-calendar-mcp"],
+      "env": {
+        "GOOGLE_OAUTH_CREDENTIALS": "/caminho/para/google-calendar-oauth.json"
+      },
+      "description": "Google Calendar — datas de voo de campanha."
+    },
+    "clickup-midify": {
+      "command": "npx",
+      "args": ["-y", "@taazkareem/clickup-mcp-server"],
+      "env": {
+        "CLICKUP_API_KEY": "INSIRA_SUA_API_KEY_CLICKUP",
+        "CLICKUP_TEAM_ID": "INSIRA_SEU_TEAM_ID_CLICKUP"
+      },
+      "description": "ClickUp — tarefas de campanha, assets aprovados."
+    },
+    "trello": {
+      "command": "npx",
+      "args": ["-y", "trello-mcp"],
+      "env": {
+        "TRELLO_API_KEY": "INSIRA_SUA_API_KEY_TRELLO",
+        "TRELLO_TOKEN": "INSIRA_SEU_TOKEN_TRELLO"
+      },
+      "description": "Trello — alternativa ao ClickUp para gestão de assets."
+    }
+  }
+}

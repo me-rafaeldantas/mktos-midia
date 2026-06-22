@@ -1,0 +1,16 @@
+# Ignora arquivos do sistema operacional e IDEs
+.DS_Store
+.vscode/
+.idea/
+
+# Ignora o ambiente virtual Python
+.venv/
+__pycache__/
+*.pyc
+
+# Ignora arquivos locais de credenciais e MCP
+.mcp.json
+
+# Ignora dados confidenciais dos clientes de tráfego pago
+data/*
+!data/.gitkeep

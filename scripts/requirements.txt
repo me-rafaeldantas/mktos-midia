@@ -1,0 +1,29 @@
+# mktOS Mídia — Dependências Python
+#
+# Instalar: pip install -r requirements.txt
+#
+# O plugin funciona sem dependências opcionais (modo conhecimento puro).
+# Instale as dependências principais para habilitar análise de copy e conteúdo.
+
+# --- Principais (scoring de copy, análise de conteúdo, legibilidade) ---
+nltk>=3.8
+textstat>=0.7
+
+# --- Requisições HTTP (validação de landing pages, tracking-audit) ---
+requests>=2.31
+
+# --- Web scraping (fallback de keywords sem API do Google Ads) ---
+beautifulsoup4>=4.12
+
+# --- Exportação Excel (negativos para importação no Google Ads) ---
+openpyxl>=3.1.0
+
+# --- Opcional: geração de QR code (utm-generator.py --qr) ---
+# pip install qrcode Pillow
+# qrcode>=7.4
+# Pillow>=10.0
+
+# --- Opcional: Google Ads API via biblioteca oficial ---
+# Necessário para google-ads-publisher.py (Sprint 11)
+# pip install google-ads
+# google-ads>=24.0.0

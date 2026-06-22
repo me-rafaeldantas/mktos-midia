@@ -1,0 +1,17 @@
+{
+  "name": "mktos-midia",
+  "description": "mktOS Mídia — Sistema operacional de mídia paga para Claude Code",
+  "owner": {
+    "name": "Rafael Dantas"
+  },
+  "plugins": [
+    {
+      "name": "mktOS Mídia",
+      "description": "Sistema operacional de mídia paga — planejamento, criação, lançamento, monitoramento e relatórios para Google Ads e Meta Ads.",
+      "author": {
+        "name": "Rafael Dantas"
+      },
+      "source": "."
+    }
+  ]
+}

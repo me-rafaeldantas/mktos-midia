@@ -1,0 +1,44 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/setup-mktos.py --action check-deps && python3 ${CLAUDE_PLUGIN_ROOT}/scripts/setup-mktos.py --action status"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "command": "Verifique o caminho do arquivo sendo gravado/editado. Se o arquivo NÃO estiver dentro de um diretório do plugin (skills/, agents/, scripts/, hooks/, .claude-plugin/) E NÃO for conteúdo de mídia paga (copy de anúncio, headline, descrição de campanha, landing page, texto de criativo), responda 'SKIP' imediatamente. Para conteúdo de mídia paga: verifique se existe um perfil ativo em ./data/clientes/_conta-ativa.json. Se existir, leia ./data/clientes/{slug}/perfil.json e verifique: (1) se o copy está alinhado com o tom da marca definido em brand_voice, (2) se não há alegações superlativas ('melhor', 'único', '#1') sem respaldo, (3) se estatísticas citadas têm fonte atribuída. Sinalize apenas problemas reais — não preferências de estilo. Mantenha a verificação concisa. $ARGUMENTS"
+          }
+        ]
+      },
+      {
+        "matcher": "mcp_.*",
+        "hooks": [
+          {
+            "type": "prompt",
+            "command": "Verifique se esta chamada MCP é uma operação de ESCRITA (criar campanha, atualizar anúncio, lançar ad set, enviar email, atualizar tarefa no ClickUp/Trello, criar evento no Calendar, publicar post, alterar orçamento, pausar/ativar campanha). Se for operação de LEITURA (buscar métricas, listar campanhas, consultar performance, verificar calendário, pesquisar), responda 'SKIP' imediatamente. Para operações de ESCRITA: (1) Confirme que o usuário aprovou EXPLICITAMENTE esta ação na conversa atual — procure por confirmação literal ('sim', 'pode executar', 'confirmo', 'pode lançar'). (2) Para campanhas de anúncio: verifique se o orçamento configurado está dentro de orcamento_mensal em ./data/clientes/{slug}/perfil.json — se exceder, BLOQUEIE e informe o valor exato do excesso em R$. (3) Para lançamentos: confirme que o status inicial é PAUSED (não ENABLED). (4) Confirme que a plataforma destino corresponde à intenção declarada do usuário. Se QUALQUER verificação falhar, BLOQUEIE a operação e explique o motivo. Se todas passarem, responda 'ALLOW'. $ARGUMENTS"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "command": "Se trabalho de mídia paga foi realizado nesta sessão (planos criados, campanhas analisadas, orçamentos otimizados, performance avaliada, decisões de targeting tomadas): 1. Resuma 1 a 3 aprendizados ou decisões principais desta sessão. 2. Se existir conta ativa (verifique _conta-ativa.json), salve cada insight executando: python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/rastreador-campanhas.py\" --brand {slug} --action save-insight --data '{\"type\":\"session_learning\",\"insight\":\"[o insight]\",\"source\":\"session\",\"context\":\"[qual trabalho gerou este insight]\"}' — substitua {slug} pelo slug ativo e preencha com dados reais. 3. WORK LOG — SAFETY NET: Verifique se algum plano, lista de ações, ajuste de campanha, realocação de orçamento ou auditoria foram gerados nesta sessão E ainda NÃO registrados no work-log. Se sim, apresente ao usuário: 'Encontrei [N] tarefas desta sessão não registradas no work-log: [lista com formato [Cliente][Categoria] Descrição]. Quer registrar agora? (Sim/Não)' — Se confirmado, para cada tarefa execute: python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/log-tarefas.py\" --action log --data '{\"account_slug\":\"[slug]\",\"title\":\"[Categoria] [Descrição]\",\"category\":\"Ads\",\"priority\":\"normal\",\"source_skill\":\"[nome-do-skill]\"}' 4. Diga ao usuário: 'Sessão finalizada. Aprendizados salvos: [liste-os]. Para verificar o work-log completo, use /mktos:conta status.' Se nenhuma conta ativa existir ou nenhum trabalho significativo tiver sido feito, ignore silenciosamente. $ARGUMENTS"
+          }
+        ]
+      }
+    ]
+  }
+}
